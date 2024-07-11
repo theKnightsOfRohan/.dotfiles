@@ -2,16 +2,12 @@ return {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = {
         "neovim/nvim-lspconfig",
-        "hrsh7th/nvim-cmp",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-nvim-lua",
-        "L3MON4D3/LuaSnip",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "folke/neodev.nvim",
         "zeioth/garbage-day.nvim",
-        "artemave/workspace-diagnostics.nvim"
+        "artemave/workspace-diagnostics.nvim",
+        "RubixDev/mason-update-all",
     },
     event = "VeryLazy",
     config = function()
@@ -58,55 +54,7 @@ return {
             end
         end
 
-        local ls = require("luasnip")
-
-        local s = ls.s
-        local fmt = require("luasnip.extras.fmt").fmt
-        local i = ls.insert_node
-        local rep = require("luasnip.extras").rep
-
-        ls.add_snippets("cpp", {
-            s("#ifndef", fmt("#ifndef {}_H\n#define {}_H\n\n{}\n\n#endif // {}_H", {
-                i(1, "HEADERNAME"), rep(1), i(0), rep(1)
-            })),
-        })
-
-        vim.keymap.set({ "i", "s" }, "<C-l>", function()
-            if ls.expand_or_jumpable() then
-                ls.expand_or_jump()
-            end
-        end, { silent = true })
-
-        vim.keymap.set({ "i", "s" }, "<C-h>", function()
-            if ls.expand_or_jumpable(-1) then
-                ls.expand_or_jump(-1)
-            end
-        end, { silent = true })
-
-        local cmp = require("cmp")
-
-        cmp.setup({
-            window = {
-                documentation = cmp.config.window.bordered(),
-                completion = cmp.config.window.bordered(),
-            },
-            mapping = cmp.mapping.preset.insert({
-                ["<C-j>"] = cmp.mapping.select_next_item(),
-                ["<C-k>"] = cmp.mapping.select_prev_item(),
-                ["<C-CR>"] = cmp.mapping.confirm({ select = true }),
-            }),
-            sources = {
-                { name = "nvim_lua" },
-                { name = "nvim_lsp" },
-                { name = "path" },
-                { name = "luasnip" },
-            },
-            snippet = {
-                expand = function(args)
-                    ls.lsp_expand(args.body)
-                end,
-            }
-        })
+        require("mason-update-all").setup()
 
         local lspconfig = require("lspconfig")
 

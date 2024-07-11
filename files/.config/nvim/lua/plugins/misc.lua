@@ -6,8 +6,4 @@ return {
         --     "MunifTanjim/nui.nvim",
         -- }
     },
-    {
-        "NStefan002/speedtyper.nvim",
-        cmd = "Speedtyper",
-    },
 }

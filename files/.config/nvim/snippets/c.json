@@ -1,0 +1,13 @@
+{
+  "ifndef": {
+    "body": [
+      "#ifndef ${1:HEADER}_H",
+      "#define ${1:HEADER}_H",
+      "",
+      "$0",
+      "",
+      "#endif // ${1:HEADER}_H"
+    ],
+    "prefix": "ifndef"
+  }
+}
