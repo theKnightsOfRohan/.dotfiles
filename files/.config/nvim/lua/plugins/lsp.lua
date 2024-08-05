@@ -27,6 +27,7 @@ return {
             "clangd",
             "csharpier",
             "gradle-language-server",
+            "html-lsp",
             "java-debug-adapter",
             "jdtls",
             "json-lsp",
@@ -80,8 +81,12 @@ return {
                     telemetry = {
                         enable = false,
                     },
+                    completion = {
+                        singleFileMode = false,
+                    }
                 },
             },
+            root_dir = function() return vim.fn.getcwd() end
         })
 
         lspconfig.bashls.setup({
@@ -122,6 +127,16 @@ return {
         lspconfig.zls.setup({
             root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "zig" },
+        })
+
+        lspconfig.tsserver.setup({
+            root_dir = function() return vim.fn.getcwd() end,
+            filetypes = { "typescript", "javascript" },
+        })
+
+        lspconfig.html.setup({
+            root_dir = function() return vim.fn.getcwd() end,
+            filetypes = { "html", "nml" },
         })
 
         vim.g.zig_fmt_autosave = 0

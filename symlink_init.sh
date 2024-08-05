@@ -18,13 +18,13 @@ for df in $dotfiles; do
 
         echo "$df symlink does not exist or is invalid"
 
-        ln -s "$src_path" "$tgt_path"
+        ln -sf "$src_path" "$tgt_path"
 
         echo "Symlinked $df"
     fi
 done
 
-src_pth="$HOME/.dotfiles/upkeep"
+src_path="$HOME/.dotfiles/upkeep"
 
 tgt_path="/usr/local/bin/upkeep"
 
@@ -33,7 +33,7 @@ if [ -L "$tgt_path" ] && [ -e "$(readlink "$tgt_path")" ]; then
 else
     echo "upkeep symlink does not exist or is invalid"
 
-    sudo ln -s "$src_path" "$tgt_path"
+    sudo ln -sf "$src_path" "$tgt_path"
 
     echo "Symlinked upkeep"
 fi

@@ -14,6 +14,7 @@ packages=(
     "libgit2"
     "make"
     "ncurses"
+    "neofetch"
     "neovim"
     "node"
     "pkg-config"
