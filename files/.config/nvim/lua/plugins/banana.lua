@@ -1,6 +1,6 @@
 return {
     -- "CWood-sdf/banana.nvim",
-    dir = "~/Documents/GitHub/banana.nvim/",
+    dir = "~/Documents/GitHub/personal/banana.nvim/",
     config = function()
         local Banana = require("banana")
         Banana.initTsParsers()

@@ -3,6 +3,7 @@
 
 export PATH="$PATH:/opt/homebrew/bin" # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 
+clear
 neofetch
 
 # Initialization code that may require console input (password prompts, [y/n]
@@ -23,6 +24,8 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 alias cdg="cd ~/Documents/GitHub"
+alias cdp="cd ~/Documents/Github/personal"
+alias cds="cd ~/Documents/Github/school"
 alias cdot="cd ~/.dotfiles"
 alias cdc="cd ~/.dotfiles/files/.config/nvim"
 
