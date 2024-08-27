@@ -1,7 +1,7 @@
 # Amazon Q pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 
-export PATH="$PATH:/opt/homebrew/bin" # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+export PATH="$PATH:/opt/homebrew/bin:~/Documents/GitHub/school/lc3tools/build/bin"
 
 clear
 neofetch
@@ -23,11 +23,16 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+alias resource="source ~/.zshrc"
+
 alias cdg="cd ~/Documents/GitHub"
 alias cdp="cd ~/Documents/Github/personal"
 alias cds="cd ~/Documents/Github/school"
 alias cdot="cd ~/.dotfiles"
 alias cdc="cd ~/.dotfiles/files/.config/nvim"
+alias cdw="cd ~/Documents/GitHub/Spurlock"
+
+alias prelab="git fetch release;git merge release/main -m \"prelab: merge release\" --allow-unrelated-histories"
 
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"

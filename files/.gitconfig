@@ -1,9 +1,9 @@
-[includeIf "gitdir:~/Documents/GitHub/school/*"]
-  path = ~/.gitconfig.d/school.conf
-
-[includeIf "gitdir:~/Documents/GitHub/personal/*"]
-  path = ~/.gitconfig.d/personal.conf
-
 [user]
 	name = theKnightsOfRohan
 	email = shadowsovereign100@gmail.com
+
+[includeIf "gitdir:~/Documents/GitHub/school"]
+    path = ~/.gitconfig.d/school.conf
+
+[includeIf "gitdir:~/Documents/GitHub/personal"]
+    path = ~/.gitconfig.d/personal.conf

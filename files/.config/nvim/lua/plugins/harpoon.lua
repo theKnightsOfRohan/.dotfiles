@@ -24,16 +24,16 @@ return {
         end)
 
         -- TODO: Figure out how to turn this into numbers
-        vim.keymap.set("n", "<C-q>", function()
+        vim.keymap.set("n", "<C-a>", function()
             require("harpoon"):list():select(1)
         end)
-        vim.keymap.set("n", "<C-w>", function()
+        vim.keymap.set("n", "<C-s>", function()
             require("harpoon"):list():select(2)
         end)
-        vim.keymap.set("n", "<C-e>", function()
+        vim.keymap.set("n", "<C-d>", function()
             require("harpoon"):list():select(3)
         end)
-        vim.keymap.set("n", "<C-r>", function()
+        vim.keymap.set("n", "<C-f>", function()
             require("harpoon"):list():select(4)
         end)
     end,
