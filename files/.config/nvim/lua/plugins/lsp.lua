@@ -4,7 +4,25 @@ return {
         "neovim/nvim-lspconfig",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "folke/neodev.nvim",
+        {
+            "folke/lazydev.nvim",
+            dependencies = {
+                {
+                    "hrsh7th/nvim-cmp",
+                    opts = function(_, opts)
+                        opts.sources = opts.sources or {}
+                        table.insert(opts.sources, {
+                            name = "lazydev",
+                            group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+                        })
+                    end,
+                },
+                {
+                    "Bilal2453/luvit-meta",
+                    lazy = true
+                },
+            }
+        },
         "zeioth/garbage-day.nvim",
         "artemave/workspace-diagnostics.nvim",
         "RubixDev/mason-update-all",
@@ -27,7 +45,6 @@ return {
             "clangd",
             "csharpier",
             "gradle-language-server",
-            "harper-ls",
             "html-lsp",
             "java-debug-adapter",
             "jdtls",
@@ -41,6 +58,7 @@ return {
             "shfmt",
             "stylua",
             "typos-lsp",
+            "verible",
             "vim-language-server",
             "zls",
         }
@@ -140,9 +158,9 @@ return {
             filetypes = { "html", "nml" },
         })
 
-        lspconfig.harper_ls.setup({
+        lspconfig.verible.setup({
             root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "*" },
+            filetypes = { "systemverilog", "verilog" },
         })
 
         vim.g.zig_fmt_autosave = 0
