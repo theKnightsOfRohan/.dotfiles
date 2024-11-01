@@ -9,6 +9,6 @@ return {
     -- },
     -- dir = "~/Documents/Github/personal/banana.nvim/",
     {
-        dir = "~/Documents/Github/personal/banana_playground/",
+        -- dir = "~/Documents/Github/personal/banana_playground/",
     }
 }

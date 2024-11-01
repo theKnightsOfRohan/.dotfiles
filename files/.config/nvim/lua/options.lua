@@ -95,7 +95,6 @@ end, {})
 vim.api.nvim_create_user_command("URL", function(opts)
     _ = opts
 
-
     local s_start = vim.fn.getpos("'<")
     local s_end = vim.fn.getpos("'>")
     local n_lines = math.abs(s_end[2] - s_start[2]) + 1
@@ -117,3 +116,31 @@ vim.api.nvim_create_user_command("URL", function(opts)
         vim.api.nvim_err_writeln(err)
     end
 end, { range = true })
+
+-- Define the command
+vim.api.nvim_create_user_command('MD2PDF', function()
+    -- Get the full path of the current buffer
+    local full_path = vim.fn.expand('%:p')
+
+    -- Print the full path
+    print("Converting " .. full_path .. "...")
+
+    assert(vim.bo.filetype == "markdown", "Cannot convert a non-markdown file to a PDF")
+
+    vim.system({ "md2pdf", full_path }, nil, function(_)
+        print("Conversion completed!")
+    end);
+end, {})
+
+vim.keymap.set("n", "<leader>md", vim.cmd.MD2PDF, { silent = false });
+
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "md", "markdown" },
+    callback = function()
+        vim.schedule(function()
+            vim.keymap.set("v", "<leader>b", "c**<Esc>pa**", { buffer = true })
+            vim.keymap.set("v", "<leader>i", "c*<Esc>pa*", { buffer = true })
+        end)
+    end
+})

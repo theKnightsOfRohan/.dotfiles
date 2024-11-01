@@ -3,6 +3,14 @@ return {
     event = "VeryLazy",
     dependencies = {
         "MunifTanjim/nui.nvim",
+        {
+            "MeanderingProgrammer/render-markdown.nvim",
+            dependencies = {
+                'nvim-treesitter/nvim-treesitter',
+                'nvim-tree/nvim-web-devicons'
+            },
+            opts = {},
+        }
     },
     config = function()
         require("noice").setup({

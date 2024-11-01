@@ -4,7 +4,7 @@ return {
         require("here-term").setup({
             -- The command we run when exiting the terminal and no other buffers are listed. An empty
             -- buffer is shown by default.
-            startup_command = "enew", -- Startify, Dashboard, etc. Make sure it has been loaded before `here.term`.
+            startup_command = "", -- Startify, Dashboard, etc. Make sure it has been loaded before `here.term`.
 
             -- Mappings
             -- Every mapping bellow can be customized by providing your preferred combo, or disabled
@@ -28,6 +28,21 @@ return {
             },
         })
 
+        vim.keymap.set({ "n", "t" }, "<leader>t", function() require("here-term").toggle_terminal() end)
         vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]])
+        vim.keymap.set("n", "<leader>g", function()
+            local id
+
+            id = vim.api.nvim_create_autocmd("TermEnter", {
+                callback = function()
+                    local cmd = vim.api.nvim_replace_termcodes("lazygit<CR>", true, false, true)
+                    vim.api.nvim_feedkeys(cmd, "t", true)
+
+                    vim.api.nvim_del_autocmd(id);
+                end
+            })
+
+            require("here-term").toggle_terminal()
+        end)
     end,
 }

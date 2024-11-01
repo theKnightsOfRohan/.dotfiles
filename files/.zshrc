@@ -1,7 +1,14 @@
 # Amazon Q pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 
-export PATH="$PATH:/opt/homebrew/bin:~/Documents/GitHub/school/lc3tools/build/bin"
+# Different PATH search variables
+export PATH=$PATH:/opt/homebrew/bin:~/Documents/Github/school/lc3tools/build/bin
+export C_INCLUDE_PATH=$(brew --prefix)/include/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/homebrew/include/
+
+# lc3tools Commands
+alias lc3convert="assembler"
+alias lc3sim="simulator"
 
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -28,6 +35,8 @@ alias cds="cd ~/Documents/Github/school"
 alias cdot="cd ~/.dotfiles"
 alias cdc="cd ~/.dotfiles/files/.config/nvim"
 alias cdw="cd ~/Documents/GitHub/Spurlock"
+
+alias lg="lazygit"
 
 alias prelab="git fetch release;git merge release/main -m \"prelab: merge release\" --allow-unrelated-histories"
 
