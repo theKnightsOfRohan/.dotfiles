@@ -38,6 +38,7 @@ return {
         })
 
         local ensure_installed = {
+            "asmfmt",
             "bash-language-server",
             "beautysh",
             "checkmake",
