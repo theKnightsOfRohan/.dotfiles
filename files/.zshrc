@@ -1,5 +1,5 @@
 # Different PATH search variables
-export PATH=$PATH:/opt/homebrew/bin:~/Documents/Github/school/lc3tools/build/bin
+export PATH=$PATH:/opt/homebrew/bin:~/Documents/Github/school/lc3tools/build/bin:/Users/rohanseth/Library/Python/3.9/bin
 export C_INCLUDE_PATH=$(brew --prefix)/include/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/homebrew/include/
 

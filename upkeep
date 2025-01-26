@@ -7,3 +7,5 @@ brew cleanup -s
 nvim --headless -c "Upkeep"
 
 rm ~/Documents/**/.DS_Store
+
+source ~/.zshrc

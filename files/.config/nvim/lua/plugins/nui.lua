@@ -1,8 +1,17 @@
 return {
     "MunifTanjim/nui.nvim",
+    event = "VeryLazy",
+    dependencies = {
+        {
+            "MeanderingProgrammer/render-markdown.nvim",
+            dependencies = {
+                'nvim-treesitter/nvim-treesitter',
+                'nvim-tree/nvim-web-devicons'
+            },
+            opts = {},
+        }
+    },
     config = function()
-        local Menu = require("nui.menu")
-
         ---@param items Array
         ---@param format_item function
         ---@param prompt string
@@ -31,6 +40,8 @@ return {
             })
             opts = opts or {}
             local format_item = opts.format_item or tostring
+
+            local Menu = require("nui.menu")
 
             Menu({
                 relative = "cursor",
@@ -68,6 +79,23 @@ return {
                     on_choice(selected.data)
                 end,
             }):mount()
+        end
+
+        -- See https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
+        local notify = vim.notify
+
+        ---@param msg string
+        ---@param ... any
+        vim.notify = function(msg, ...)
+            if
+                msg:match(
+                    "warning: multiple different client offset_encodings detected for buffer, this is not supported yet"
+                )
+            then
+                return
+            end
+
+            notify(msg, ...)
         end
     end,
 }

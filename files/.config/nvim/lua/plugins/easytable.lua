@@ -109,6 +109,19 @@ return {
                 )
 
                 vim.keymap.set(
+                    "i",
+                    "<CR>",
+                    function() vim.cmd("silent! JumpDown") end,
+                    { buffer = buf, }
+                )
+                vim.keymap.set(
+                    "i",
+                    "<S-CR>",
+                    function() vim.cmd("silent! JumpUp") end,
+                    { buffer = buf, }
+                )
+
+                vim.keymap.set(
                     "n",
                     "<Tab>",
                     function() vim.cmd("silent! JumpToNextCell") end,
