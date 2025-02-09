@@ -1,1 +1,10 @@
-{}
+{
+  "if err": {
+    "body": [
+      "err != nil {",
+      "\treturn err",
+      "}"
+    ],
+    "prefix": "err"
+  }
+}

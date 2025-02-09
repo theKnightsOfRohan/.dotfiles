@@ -1,0 +1,2 @@
+ command script import ~/lldbinit.py
+ command script import ~/Library/Python/3.9/lib/python/site-packages/voltron/entry.py

@@ -32,10 +32,21 @@ end
 -- Copy highlighted selection to clipboard
 vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
+vim.cmd([[
+    function! TrimWhitespace()
+        let l:save = winsaveview()
+        keeppatterns %s/\s\+$//e
+        call winrestview(l:save)
+    endfunction
+]])
+
 -- Quick save
 vim.keymap.set("n", "<leader>s", function()
-    vim.cmd("silent write")
-    vim.cmd("silent lua vim.lsp.buf.format()")
+    vim.cmd([[
+        silent write
+        silent lua vim.lsp.buf.format()
+        call TrimWhitespace()
+    ]])
     vim.cmd.write()
     vim.diagnostic.show(nil, 0)
 end, { noremap = true, silent = true })

@@ -1,14 +1,12 @@
 #!/bin/zsh
 
 packages=(
-    "cjson"
     "cmake"
     "csvlens"
     "gcc"
     "gh"
     "git"
-    "glow"
-    "gradle"
+    "go"
     "jq"
     "lazygit"
     "libgit2"
@@ -25,7 +23,6 @@ packages=(
     "tldr"
     "tree"
     "wget"
-    "xmake"
     "zig"
     "zsh-autosuggestions"
     "zsh-syntax-highlighting"

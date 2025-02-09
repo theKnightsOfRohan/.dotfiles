@@ -1,7 +1,7 @@
 # Different PATH search variables
-export PATH=$PATH:/opt/homebrew/bin:~/Documents/Github/school/lc3tools/build/bin:/Users/rohanseth/Library/Python/3.9/bin
-export C_INCLUDE_PATH=$(brew --prefix)/include/
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/homebrew/include/
+export PATH=$PATH:/opt/homebrew/bin:/Users/rohanseth/Library/Python/3.9/bin:/Users/rohanseth/node_modules/.bin:~/go/bin
+# export C_INCLUDE_PATH=$C_INCLUDE_PATH:$(brew --prefix)/include/
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/homebrew/include/
 
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.

@@ -44,8 +44,8 @@ return {
             "checkmake",
             "clang-format",
             "clangd",
-            "csharpier",
             "gradle-language-server",
+            "gopls",
             "html-lsp",
             "java-debug-adapter",
             "jdtls",
@@ -129,6 +129,11 @@ return {
             filetypes = { "gradle" },
         })
 
+        lspconfig.gopls.setup({
+            root_dir = function() return vim.fn.getcwd() end,
+            filetypes = { "go" },
+        })
+
         lspconfig.kotlin_language_server.setup({
             root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "kotlin" },
@@ -162,6 +167,11 @@ return {
         lspconfig.verible.setup({
             root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "systemverilog", "verilog" },
+        })
+
+        lspconfig.pylsp.setup({
+            root_dir = function() return vim.fn.getcwd() end,
+            filetypes = { "python" }
         })
 
         vim.g.zig_fmt_autosave = 0
