@@ -1,7 +1,13 @@
 # Different PATH search variables
 export PATH=$PATH:/opt/homebrew/bin:/Users/rohanseth/Library/Python/3.9/bin:/Users/rohanseth/node_modules/.bin:~/go/bin
-# export C_INCLUDE_PATH=$C_INCLUDE_PATH:$(brew --prefix)/include/
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/homebrew/include/
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$(brew --prefix)/include/:$(brew --prefix)/lib/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/homebrew/include/:$(brew --prefix)/lib/
+export CPATH=$CPATH:/opt/homebrew/include
+export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/lib
+export LDFLAGS="-L/opt/homebrew/lib"
+export CPPFLAGS="-I/opt/homebrew/include"
+
+export EDITOR='nvim'
 
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -36,3 +42,12 @@ alias cdw="cd ~/Documents/GitHub/Spurlock"
 alias lg="lazygit"
 
 alias prelab="git fetch release;git merge release/main -m \"prelab: merge release\" --allow-unrelated-histories"
+
+alias gcc="gcc-14"
+alias g++="g++-14"
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/rohanseth/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

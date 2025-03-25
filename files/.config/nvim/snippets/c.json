@@ -1,7 +1,15 @@
 {
+  "fori": {
+    "body": [
+      "for (${1:int} ${2:i} = ${3:0}; ${2:i} < ${4:len}; ${2:}++) {",
+      "    ${5:}",
+      "}"
+    ],
+    "prefix": "fori"
+  },
   "ifndef": {
     "body": [
-      "#ifndef ${1:HEADER}_H",
+      "ifndef ${1:HEADER}_H",
       "#define ${1:HEADER}_H",
       "",
       "$0",

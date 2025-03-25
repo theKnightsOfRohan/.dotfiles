@@ -1,5 +1,4 @@
 return {
-    {
-        "mhinz/vim-signify",
-    },
+    "mhinz/vim-signify",
+    "j-hui/fidget.nvim",
 }

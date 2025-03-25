@@ -145,7 +145,6 @@ end, {})
 
 vim.keymap.set("n", "<leader>md", vim.cmd.MD2PDF, { silent = false });
 
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "md", "markdown" },
     callback = function()
@@ -155,3 +154,55 @@ vim.api.nvim_create_autocmd("FileType", {
         end)
     end
 })
+
+vim.g.netrw_preview = 1
+vim.g.netrw_liststyle = 3
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "netrw",
+    once = true,
+    callback = function()
+        print("Netrw moved cursor")
+    end
+})
+
+vim.api.nvim_create_user_command("Debug", function(opts)
+    local lang = opts.fargs[1]
+    local source_cmd = 'horizontal terminal voltron view command "source list -a \\$pc -c 30" -E -F'
+    if lang ~= nil then
+        source_cmd = source_cmd .. " --lexer " .. lang
+    end
+
+    require("here-term").toggle_terminal()
+    vim.cmd(source_cmd)
+    vim.cmd([[
+        wincmd j
+        resize 10
+        startinsert
+    ]])
+end, { nargs = "?" })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+    callback = function()
+        vim.cmd("startinsert")
+        vim.api.nvim_buf_set_option(0, "number", false)
+        vim.api.nvim_buf_set_option(0, "relativenumber", false)
+    end
+})
+
+vim.api.nvim_create_autocmd("TermClose", {
+    callback = function()
+        vim.api.nvim_feedkeys("q", "t", true)
+    end
+})
+
+vim.keymap.set("n", "<leader>g", function()
+    vim.cmd([[
+        terminal lazygit
+        startinsert
+    ]])
+end)
+
+vim.api.nvim_create_user_command("Pyrun", function(opts)
+    local filepath = vim.fn.expand("%:p")
+    vim.cmd("!python3 " .. filepath)
+end, { nargs = 0 })

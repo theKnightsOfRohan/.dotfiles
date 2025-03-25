@@ -28,21 +28,9 @@ return {
             },
         })
 
-        vim.keymap.set({ "n", "t" }, "<leader>t", function() require("here-term").toggle_terminal() end)
-        vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]])
-        vim.keymap.set("n", "<leader>g", function()
-            local id
-
-            id = vim.api.nvim_create_autocmd("TermEnter", {
-                callback = function()
-                    local cmd = vim.api.nvim_replace_termcodes("lazygit<CR>", true, false, true)
-                    vim.api.nvim_feedkeys(cmd, "t", true)
-
-                    vim.api.nvim_del_autocmd(id);
-                end
-            })
-
+        vim.keymap.set({ "n", "t" }, "<leader>t", function()
             require("here-term").toggle_terminal()
         end)
+        vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]])
     end,
 }

@@ -29,7 +29,7 @@ return {
             desc = "Quickfix List (Trouble)",
         },
         {
-            "<leader>xi",
+            "gi",
             function()
                 vim.cmd("Trouble lsp_implementations toggle")
                 vim.cmd("Trouble lsp_implementations focus")

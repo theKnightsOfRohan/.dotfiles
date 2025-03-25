@@ -55,7 +55,7 @@ return {
             "luacheck",
             "omnisharp",
             "prettierd",
-            "python-lsp-server",
+            "pyright",
             "shfmt",
             "stylua",
             "typos-lsp",
@@ -169,7 +169,7 @@ return {
             filetypes = { "systemverilog", "verilog" },
         })
 
-        lspconfig.pylsp.setup({
+        lspconfig.pyright.setup({
             root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "python" }
         })

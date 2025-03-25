@@ -1,2 +1,8 @@
- command script import ~/lldbinit.py
- command script import ~/Library/Python/3.9/lib/python/site-packages/voltron/entry.py
+# command script import ~/lldbinit.py
+command script import ~/Library/Python/3.9/lib/python/site-packages/voltron/entry.py
+settings set stop-line-count-after 15
+settings set stop-line-count-before 15
+command script import ~/.dotfiles/files/zig_lldb.py
+type category enable zig.lang
+type category enable zig.std
+type category enable zig.stage2
