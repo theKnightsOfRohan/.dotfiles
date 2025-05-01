@@ -21,13 +21,7 @@ vim.g.netrw_banner = 0
 
 vim.api.nvim_command("command! Q quitall")
 vim.keymap.set("i", ";;", "<Esc>$a;", { noremap = true, silent = true })
-
--- Window navigation
-for _, dir in ipairs({ "h", "j", "k", "l" }) do
-    vim.keymap.set("n", ("m%s"):format(dir), function()
-        vim.cmd("wincmd " .. dir)
-    end)
-end
+vim.keymap.set("n", "<leader>re", ":<Up><CR>", { noremap = true, silent = true })
 
 -- Copy highlighted selection to clipboard
 vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })

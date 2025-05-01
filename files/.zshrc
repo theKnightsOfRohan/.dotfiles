@@ -1,5 +1,5 @@
 # Different PATH search variables
-export PATH=$PATH:/opt/homebrew/bin:/Users/rohanseth/Library/Python/3.9/bin:/Users/rohanseth/node_modules/.bin:~/go/bin
+export PATH=$PATH:/opt/homebrew/bin:/Users/rohanseth/Library/Python/3.9/bin:/Users/rohanseth/node_modules/.bin:~/go/bin:~/.local/share/bob/nvim-bin
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$(brew --prefix)/include/:$(brew --prefix)/lib/
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/homebrew/include/:$(brew --prefix)/lib/
 export CPATH=$CPATH:/opt/homebrew/include

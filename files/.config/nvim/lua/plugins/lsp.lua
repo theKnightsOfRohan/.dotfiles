@@ -192,7 +192,9 @@ return {
             end, opts)
 
             vim.keymap.set("n", "<leader>i", function()
-                vim.lsp.buf.hover()
+                vim.lsp.buf.hover({
+                    border = "rounded",
+                })
             end, opts)
 
             vim.keymap.set("n", "<leader>r", function()
