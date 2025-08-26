@@ -1,7 +1,6 @@
 return {
-    "VonHeikemen/lsp-zero.nvim",
+    "neovim/nvim-lspconfig",
     dependencies = {
-        "neovim/nvim-lspconfig",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         {
@@ -29,8 +28,6 @@ return {
     },
     event = "VeryLazy",
     config = function()
-        local lsp_zero = require("lsp-zero")
-
         require("mason").setup({
             ui = {
                 border = "rounded",
@@ -75,7 +72,7 @@ return {
             end
         end
 
-        require("mason-update-all").setup()
+        require("mason-update-all").setup({})
 
         local lspconfig = require("lspconfig")
 
@@ -178,36 +175,78 @@ return {
 
         require("workspace-diagnostics").setup({})
 
-        lsp_zero.on_attach(function(client, bufnr)
-            local opts = { buffer = bufnr, remap = false }
+        vim.api.nvim_create_autocmd("LspAttach", {
+            callback = function(event)
+                local client = vim.lsp.get_client_by_id(event.data.client_id)
+                local bufnr = event.buf
+                local opts = { buffer = bufnr, remap = false }
 
-            require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+                require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 
-            if (client.name ~= "lua_ls" and client.name ~= "jdtls" and client.name ~= "zls") then
-                client.server_capabilities.semanticTokensProvider = nil
-            end
+                vim.keymap.set("n", "gd", function()
+                    vim.lsp.buf.definition()
+                end, opts)
 
-            vim.keymap.set("n", "gd", function()
-                vim.lsp.buf.definition()
-            end, opts)
+                vim.keymap.set("n", "<leader>i", function()
+                    vim.lsp.buf.hover({ border = "rounded" })
+                end, opts)
 
-            vim.keymap.set("n", "<leader>i", function()
-                vim.lsp.buf.hover({
-                    border = "rounded",
-                })
-            end, opts)
+                vim.keymap.set("n", "<leader>r", function()
+                    vim.lsp.buf.rename()
+                end, opts)
 
-            vim.keymap.set("n", "<leader>r", function()
-                vim.lsp.buf.rename()
-            end, opts)
+                vim.keymap.set({ "n", "v" }, "<leader>a", function()
+                    vim.lsp.buf.code_action({})
+                end, opts)
+            end,
+        })
 
-            vim.keymap.set({ "n", "v" }, "<leader>a", function()
-                vim.lsp.buf.code_action({})
-            end, opts)
-        end)
-
+        -- Below diagnostics config and autocmds lifted from https://www.reddit.com/r/neovim/comments/1jpbc7s/disable_virtual_text_if_there_is_diagnostic_in/?share_id=TMnSUgCygO7v9SW_qlAv4&utm_medium=ios_app&utm_name=ioscss&utm_source=share&utm_term=1
         vim.diagnostic.config({
+            virtual_text = true,
+            virtual_lines = { current_line = true },
+            underline = true,
+            update_in_insert = false,
             signs = false,
+        })
+
+        local og_virt_text
+        local og_virt_line
+        vim.api.nvim_create_autocmd({ 'CursorMoved', 'DiagnosticChanged' }, {
+            group = vim.api.nvim_create_augroup('diagnostic_only_virtlines', {}),
+            callback = function()
+                if og_virt_line == nil then
+                    og_virt_line = vim.diagnostic.config().virtual_lines
+                end
+
+                -- ignore if virtual_lines.current_line is disabled
+                if not (og_virt_line and og_virt_line.current_line) then
+                    if og_virt_text then
+                        vim.diagnostic.config({ virtual_text = og_virt_text })
+                        og_virt_text = nil
+                    end
+                    return
+                end
+
+                if og_virt_text == nil then
+                    og_virt_text = vim.diagnostic.config().virtual_text
+                end
+
+                local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+
+                if vim.tbl_isempty(vim.diagnostic.get(0, { lnum = lnum })) then
+                    vim.diagnostic.config({ virtual_text = og_virt_text })
+                else
+                    vim.diagnostic.config({ virtual_text = false })
+                end
+            end
+        })
+
+        vim.api.nvim_create_autocmd('ModeChanged', {
+            group = vim.api.nvim_create_augroup('diagnostic_redraw', {}),
+            callback = function()
+                pcall(vim.diagnostic.show)
+            end
         })
     end,
 }

@@ -21,7 +21,6 @@ export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/opt/homebrew/opt/freeimage
 # zsh helpers (theme, autocomplete, autosuggestions, syntax highlighting)
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 bindkey              '^I'         menu-complete
@@ -43,8 +42,8 @@ alias lg="lazygit"
 
 alias prelab="git fetch release;git merge release/main -m \"prelab: merge release\" --allow-unrelated-histories"
 
-alias gcc="gcc-14"
-alias g++="g++-14"
+alias gcc="gcc-15"
+alias g++="g++-15"
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/rohanseth/.docker/completions $fpath)

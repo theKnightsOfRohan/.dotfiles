@@ -196,7 +196,7 @@ vim.keymap.set("n", "<leader>g", function()
     ]])
 end)
 
-vim.api.nvim_create_user_command("Pyrun", function(opts)
+vim.api.nvim_create_user_command("Pyrun", function(_)
     local filepath = vim.fn.expand("%:p")
     vim.cmd("!python3 " .. filepath)
 end, { nargs = 0 })
