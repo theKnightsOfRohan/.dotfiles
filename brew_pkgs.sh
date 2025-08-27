@@ -22,6 +22,8 @@ packages=(
     "sdl2"
     "tldr"
     "tree"
+    "tree-sitter"
+    "tree-sitter-cli"
     "wget"
     "zig"
     "zsh-autosuggestions"
