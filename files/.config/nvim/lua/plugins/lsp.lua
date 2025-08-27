@@ -56,6 +56,7 @@ return {
             "shfmt",
             "stylua",
             "typos-lsp",
+            "texlab",
             "verible",
             "vim-language-server",
             "zls",
@@ -169,6 +170,11 @@ return {
         lspconfig.pyright.setup({
             root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "python" }
+        })
+
+        lspconfig.texlab.setup({
+            root_dir = function() return vim.fn.getcwd() end,
+            filetypes = { "latex", "markdown" }
         })
 
         vim.g.zig_fmt_autosave = 0

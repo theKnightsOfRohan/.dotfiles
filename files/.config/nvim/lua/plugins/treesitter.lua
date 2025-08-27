@@ -24,6 +24,7 @@ return {
                 "markdown_inline",
                 "make",
                 "regex",
+                "latex",
             },
 
             ignore_install = {},

@@ -9,6 +9,24 @@ return {
                 'nvim-tree/nvim-web-devicons'
             },
             opts = {},
+        },
+        {
+            "jbyuki/nabla.nvim",
+            dependencies = {
+                "nvim-neo-tree/neo-tree.nvim",
+                "williamboman/mason.nvim",
+            },
+            keys = function()
+                return {
+                    {
+                        "<leader>p",
+                        function()
+                            require("nabla").toggle_virt()
+                        end,
+                        desc = "NablaPopUp",
+                    },
+                }
+            end,
         }
     },
     config = function()
@@ -88,6 +106,9 @@ return {
         ---@param ... any
         vim.notify = function(msg, ...)
             if msg:match("warning: multiple different client offset_encodings detected for buffer, this is not supported yet") then
+                return
+            end
+            if msg:match('Border type "none" is not supported, falling back to "rounded"') then
                 return
             end
 
