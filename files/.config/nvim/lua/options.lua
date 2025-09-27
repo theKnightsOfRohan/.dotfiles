@@ -17,6 +17,8 @@ vim.opt.swapfile = false
 vim.opt.hidden = true
 vim.opt.termguicolors = true
 vim.opt.undofile = true
+vim.opt.signcolumn = "yes:1"
+vim.o.winborder = "rounded"
 vim.g.netrw_banner = 0
 
 vim.api.nvim_command("command! Q quitall")

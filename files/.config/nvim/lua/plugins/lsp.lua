@@ -16,13 +16,8 @@ return {
                         })
                     end,
                 },
-                {
-                    "Bilal2453/luvit-meta",
-                    lazy = true
-                },
             }
         },
-        "zeioth/garbage-day.nvim",
         "artemave/workspace-diagnostics.nvim",
         "RubixDev/mason-update-all",
     },
@@ -33,6 +28,9 @@ return {
                 border = "rounded",
             },
         })
+        require("mason-lspconfig").setup({
+            automatic_enable = false,
+        })
 
         local ensure_installed = {
             "asmfmt",
@@ -41,17 +39,10 @@ return {
             "checkmake",
             "clang-format",
             "clangd",
-            "gradle-language-server",
             "gopls",
-            "html-lsp",
-            "java-debug-adapter",
-            "jdtls",
             "json-lsp",
-            "kotlin-language-server",
             "lua-language-server",
             "luacheck",
-            "omnisharp",
-            "prettierd",
             "pyright",
             "shfmt",
             "stylua",
@@ -75,9 +66,7 @@ return {
 
         require("mason-update-all").setup({})
 
-        local lspconfig = require("lspconfig")
-
-        lspconfig.lua_ls.setup({
+        vim.lsp.config("lua_ls", {
             settings = {
                 Lua = {
                     runtime = {
@@ -104,78 +93,27 @@ return {
                     }
                 },
             },
-            root_dir = function() return vim.fn.getcwd() end
+            filetypes = { "lua" },
         })
+        vim.lsp.enable("lua_ls", true)
 
-        lspconfig.bashls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "sh", "zsh" },
-        })
+        local basic_servers = {
+            ["bashls"] = { "sh", "zsh" },
+            ["clangd"] = { "c", "cpp", "objc", "objcpp", "h" },
+            ["gopls"] = { "go" },
+            ["typos_lsp"] = { "*" },
+            ["zls"] = { "zig" },
+            ["verible"] = { "systemverilog", "verilog" },
+            ["pyright"] = { "python" },
+            ["texlab"] = { "latex", "markdown" },
+        }
 
-        lspconfig.clangd.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "c", "cpp", "objc", "objcpp", "h" },
-        })
-
-        lspconfig.jdtls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "java" },
-        })
-
-        lspconfig.gradle_ls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "gradle" },
-        })
-
-        lspconfig.gopls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "go" },
-        })
-
-        lspconfig.kotlin_language_server.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "kotlin" },
-        })
-
-        lspconfig.jsonls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "json" },
-        })
-
-        lspconfig.typos_lsp.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "*" },
-        })
-
-        lspconfig.zls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "zig" },
-        })
-
-        lspconfig.ts_ls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "typescript", "javascript" },
-        })
-
-        lspconfig.html.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "html", "nml" },
-        })
-
-        lspconfig.verible.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "systemverilog", "verilog" },
-        })
-
-        lspconfig.pyright.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "python" }
-        })
-
-        lspconfig.texlab.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "latex", "markdown" }
-        })
+        for server, fts in pairs(basic_servers) do
+            vim.lsp.config(server, {
+                filetypes = fts,
+            })
+            vim.lsp.enable(server, true)
+        end
 
         vim.g.zig_fmt_autosave = 0
 
