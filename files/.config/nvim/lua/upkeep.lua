@@ -6,7 +6,7 @@ return function()
     vim.api.nvim_create_autocmd('User', {
         pattern = 'MasonUpdateAllComplete',
         callback = function()
-            vim.cmd("Q")
+            vim.cmd("q!")
         end,
     })
 

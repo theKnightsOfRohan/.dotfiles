@@ -8,6 +8,7 @@ export LDFLAGS="-L/opt/homebrew/lib"
 export CPPFLAGS="-I/opt/homebrew/include"
 
 export EDITOR='nvim'
+export MANPAGER='nvim +Man!'
 
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.

@@ -30,6 +30,7 @@ return {
 
         vim.keymap.set({ "n", "t" }, "<leader>t", function()
             require("here-term").toggle_terminal()
+            vim.opt.scrolloff = 10
         end)
         vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]])
     end,

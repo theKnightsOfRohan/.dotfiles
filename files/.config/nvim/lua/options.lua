@@ -18,31 +18,23 @@ vim.opt.hidden = true
 vim.opt.termguicolors = true
 vim.opt.undofile = true
 vim.opt.signcolumn = "yes:1"
+vim.opt.completeopt:append('fuzzy')
 vim.o.winborder = "rounded"
 vim.g.netrw_banner = 0
 
-vim.api.nvim_command("command! Q quitall")
 vim.keymap.set("i", ";;", "<Esc>$a;", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>re", ":<Up><CR>", { noremap = true, silent = true })
+vim.keymap.set("n", ";;", ";", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>re", ":<Up><CR>", { noremap = true, silent = true })
 
 -- Copy highlighted selection to clipboard
 vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
-vim.cmd([[
-    function! TrimWhitespace()
-        let l:save = winsaveview()
-        keeppatterns %s/\s\+$//e
-        call winrestview(l:save)
-    endfunction
-]])
-
 -- Quick save
 vim.keymap.set("n", "<leader>s", function()
-    vim.cmd([[
-        silent write
-        silent lua vim.lsp.buf.format()
-        call TrimWhitespace()
-    ]])
+    vim.lsp.buf.format()
+    local save = vim.fn.winsaveview()
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
+    vim.fn.winrestview(save)
     vim.cmd.write()
     vim.diagnostic.show(nil, 0)
 end, { noremap = true, silent = true })
@@ -57,7 +49,6 @@ local surrounders = {
     ["'"] = "'",
     ['"'] = '"',
     ["`"] = "`",
-    ["<"] = ">",
 }
 
 for open, close in pairs(surrounders) do
@@ -75,24 +66,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set("v", "J", ":m+1<CR>gv", { noremap = true, silent = true })
+vim.keymap.set("v", "K", ":m-2<CR>gv", { noremap = true, silent = true })
 
-vim.keymap.set("n", "<S-m>", vim.cmd.Man, { noremap = true, silent = true })
+vim.keymap.set("n", "M", vim.cmd.Man, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<Esc>", vim.cmd.noh, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<S-CR>", "o<Esc>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "q", "<Nop>", { noremap = true, silent = true })
-
-vim.api.nvim_create_user_command("Record", function()
-    vim.api.nvim_command("silent normal! qA")
-end, {})
-
-vim.api.nvim_create_user_command("StopRecord", function()
-    vim.api.nvim_command("silent normal! q")
-end, {})
 
 vim.api.nvim_create_user_command("Preview", function()
     vim.api.nvim_command("silent !open " .. vim.fn.expand("%:p"))
@@ -120,7 +101,7 @@ vim.api.nvim_create_user_command("URL", function(opts)
     local _, err = vim.ui.open(url)
 
     if err ~= nil then
-        vim.api.nvim_err_writeln(err)
+        error(err)
     end
 end, { range = true })
 
@@ -145,8 +126,8 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = { "md", "markdown" },
     callback = function()
         vim.schedule(function()
-            vim.keymap.set("v", "<leader>b", "c**<Esc>pa**", { buffer = true })
-            vim.keymap.set("v", "<leader>i", "c*<Esc>pa*", { buffer = true })
+            vim.keymap.set("v", "<leader>b", "c**<Esc>pa**<Esc>", { buffer = true })
+            vim.keymap.set("v", "<leader>i", "c*<Esc>pa*<Esc>", { buffer = true })
         end)
     end
 })
@@ -180,8 +161,6 @@ end, { nargs = "?" })
 vim.api.nvim_create_autocmd("TermOpen", {
     callback = function()
         vim.cmd("startinsert")
-        vim.api.nvim_buf_set_option(0, "number", false)
-        vim.api.nvim_buf_set_option(0, "relativenumber", false)
     end
 })
 

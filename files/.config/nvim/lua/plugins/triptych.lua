@@ -1,6 +1,5 @@
 return {
     "simonmclean/triptych.nvim",
-    -- dir = "~/Documents/Github/personal/triptych.nvim",
     event = "VeryLazy",
     dependencies = {
         "nvim-lua/plenary.nvim",
