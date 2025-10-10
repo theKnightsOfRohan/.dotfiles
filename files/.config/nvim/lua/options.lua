@@ -66,8 +66,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
-vim.keymap.set("v", "J", ":m+1<CR>gv", { noremap = true, silent = true })
-vim.keymap.set("v", "K", ":m-2<CR>gv", { noremap = true, silent = true })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv", { noremap = true, silent = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv", { noremap = true, silent = true })
 
 vim.keymap.set("n", "M", vim.cmd.Man, { noremap = true, silent = true })
 
