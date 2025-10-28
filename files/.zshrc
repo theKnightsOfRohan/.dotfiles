@@ -43,6 +43,8 @@ alias lg="lazygit"
 
 alias prelab="git fetch release;git merge release/main -m \"prelab: merge release\" --allow-unrelated-histories"
 
+alias cdgh="cd ~/Library/Application\\ Support/com.mitchellh.ghostty/"
+
 alias gcc="gcc-15"
 alias g++="g++-15"
 

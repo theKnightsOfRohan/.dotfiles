@@ -104,14 +104,6 @@ return {
             notify(msg, ...)
         end
 
-        --[[ vim.cmd("RenderMarkdown disable") ]]
-
-        --[[ vim.api.nvim_create_user_command("RenderLatex", function(args)
-            vim.api.nvim_create_autocmd("")
-        end, {}) ]]
-
-        vim.keymap.set("n", "<leader>p", function()
-            require("nabla").toggle_virt()
-        end)
+        vim.api.nvim_create_user_command("RenderLatex", require("nabla").toggle_virt, {})
     end,
 }

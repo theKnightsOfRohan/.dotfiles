@@ -32,7 +32,7 @@ return {
                 dirs_first = true,
                 show_hidden = false,
                 line_numbers = {
-                    enabled = true,
+                    enabled = false,
                     relative = false,
                 },
                 file_icons = {
@@ -46,8 +46,8 @@ return {
                     -- Columns widths must add up to 1 after rounding to 2 decimal places
                     -- Parent or child windows can be hidden by setting a width of 0
                     ['0'] = { 0, 0.5, 0.5 },
-                    ['120'] = { 0.2, 0.3, 0.5 },
-                    ['200'] = { 0.25, 0.25, 0.5 },
+                    ['120'] = { 0.2, 0.2, 0.6 },
+                    ['200'] = { 0.2, 0.2, 0.6 },
                 },
                 highlights = { -- Highlight groups to use. See `:highlight` or `:h highlight`
                     file_names = 'NONE',
@@ -57,7 +57,13 @@ return {
                     enabled = true,
                     debounce_ms = 100,
                 },
-                backdrop = 60 -- Backdrop opacity. 0 is fully opaque, 100 is fully transparent (disables the feature)
+                backdrop = 60,     -- Backdrop opacity. 0 is fully opaque, 100 is fully transparent (disables the feature)
+                transparency = 0,  -- 0 is fully opaque, 100 is fully transparent
+                border = 'single', -- See :h nvim_open_win for border options
+                max_height = 45,
+                max_width = 220,
+                margin_x = 0, -- Space left and right
+                margin_y = 1, -- Space above and below
             },
             git_signs = {
                 enabled = true,
