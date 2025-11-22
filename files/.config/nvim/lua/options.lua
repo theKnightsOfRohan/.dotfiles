@@ -120,8 +120,6 @@ vim.api.nvim_create_user_command('MD2PDF', function()
     end);
 end, {})
 
-vim.keymap.set("n", "<leader>md", vim.cmd.MD2PDF, { silent = false });
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "md", "markdown" },
     callback = function()
@@ -129,16 +127,6 @@ vim.api.nvim_create_autocmd("FileType", {
             vim.keymap.set("v", "<leader>b", "c**<Esc>pa**<Esc>", { buffer = true })
             vim.keymap.set("v", "<leader>i", "c*<Esc>pa*<Esc>", { buffer = true })
         end)
-    end
-})
-
-vim.g.netrw_preview = 1
-vim.g.netrw_liststyle = 3
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "netrw",
-    once = true,
-    callback = function()
-        print("Netrw moved cursor")
     end
 })
 

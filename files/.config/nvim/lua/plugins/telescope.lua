@@ -38,7 +38,7 @@ return {
         vim.keymap.set("n", "<leader>pf", telescope_builtin.find_files, {})
         vim.keymap.set("n", "<leader>ps", telescope_builtin.live_grep, {})
         vim.keymap.set("n", "<leader>pl", telescope_builtin.lsp_dynamic_workspace_symbols, {})
-        vim.keymap.set("n", "<leader>pm", telescope_builtin.man_pages, {})
+        vim.keymap.set("n", "<leader>M", telescope_builtin.man_pages, {})
         vim.keymap.set("n", "<leader>H", telescope_builtin.help_tags, {})
     end,
 }

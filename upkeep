@@ -8,4 +8,4 @@ nvim --headless -c "Upkeep"
 
 rm ~/Documents/**/.DS_Store
 
-source ~/.zshrc
+reset
